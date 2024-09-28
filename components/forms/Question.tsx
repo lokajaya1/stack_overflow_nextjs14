@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +21,7 @@ import { QuestionsSchema } from "@/lib/validations";
 import { z } from "zod";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { createQuestion } from "@/lib/actions/question.action";
 
 const type: any = "create";
 
@@ -39,15 +40,19 @@ const Question = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof QuestionsSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setisSubmitting(true);
 
     try {
       // make a async call to your API -> create a question
       // contain all form data
+
+      await createQuestion({});
+
       // navigate to home page
     } catch (error) {
     } finally {
+      setisSubmitting(false);
     }
   }
 
@@ -129,7 +134,9 @@ const Question = () => {
                     // @ts-ignore
                     editorRef.current = editor;
                   }}
-                  initialValue="<p>This is the initial content of the editor.</p>"
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => field.onChange(content)}
+                  initialValue=""
                   init={{
                     height: 350,
                     menubar: false,
