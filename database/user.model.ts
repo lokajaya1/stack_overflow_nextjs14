@@ -6,30 +6,30 @@ interface IUser extends Document {
   name: string;
   username: string;
   email: string;
-  password?: string; // Optional, especially if users log in via Google or other methods
-  bio?: string; // Optional
-  picture: string; // Link to profile picture
-  location?: string; // Optional
-  portfolioWebsite?: string; // Optional link to user's portfolio
-  reputation?: number; // Optional, default value will be 0
-  saved: Schema.Types.ObjectId[]; // Array of ObjectIds referencing saved questions
+  password?: string;
+  bio?: string;
+  picture: string;
+  location?: string;
+  portfolioWebsite?: string;
+  reputation?: number;
+  saved: Schema.Types.ObjectId[];
   joinedAt: Date;
 }
 
 // Schema for User
 const UserSchema = new Schema<IUser>({
-  clerkId: { type: String, required: true, unique: true }, // Clerk auth ID
+  clerkId: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String }, // Optional
-  bio: { type: String }, // Optional
-  picture: { type: String, required: true }, // Link to picture
-  location: { type: String }, // Optional
-  portfolioWebsite: { type: String }, // Optional
-  reputation: { type: Number, default: 0 }, // Default reputation
-  saved: [{ type: Schema.Types.ObjectId, ref: "Question" }], // Ref to saved questions
-  joinedAt: { type: Date, default: Date.now }, // Auto-sets to current date
+  password: { type: String },
+  bio: { type: String },
+  picture: { type: String, required: true },
+  location: { type: String },
+  portfolioWebsite: { type: String },
+  reputation: { type: Number, default: 0 },
+  saved: [{ type: Schema.Types.ObjectId, ref: "Question" }],
+  joinedAt: { type: Date, default: Date.now },
 });
 
 // Check if model already exists, otherwise create a new model
