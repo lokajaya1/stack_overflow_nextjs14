@@ -5,47 +5,13 @@ import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filter";
+import { getQuestions } from "@/lib/actions/question.action";
 import { Item } from "@radix-ui/react-menubar";
 import Link from "next/link";
 
-const questions = [
-  {
-    _id: "1",
-    title: "Cascading Deletes SQLAlchemy?",
-    tags: [
-      { _id: "1", name: "python" },
-      { _id: "2", name: "sql" },
-    ],
-    author: {
-      _id: "123",
-      name: "John Doe",
-      picture: "https://i.pravatar.cc/300",
-    },
-    upvotes: 1500000,
-    views: 2000000,
-    answers: [{}, {}], // Assuming two empty objects for two answers
-    createdAt: new Date("2021-09-01T12:00:00.000Z"),
-  },
-  {
-    _id: "2",
-    title: "How to center a div?",
-    tags: [
-      { _id: "1", name: "css" },
-      { _id: "2", name: "sql" },
-    ],
-    author: {
-      _id: "124",
-      name: "Jane Smith",
-      picture: "https://i.pravatar.cc/300",
-    },
-    upvotes: 10,
-    views: 75000,
-    answers: [{}, {}], // Assuming two empty objects for two answers
-    createdAt: new Date("2023-09-20T10:00:00Z"),
-  },
-];
+export default async function Home() {
+  const result = await getQuestions({});
 
-export default function Home() {
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -56,7 +22,7 @@ export default function Home() {
           </Button>
         </Link>
       </div>
-      <div className="mt-11 flex justify-between gap-5 mx-sm:flex-col sm:items-center">
+      <div className="mx-sm:flex-col mt-11 flex justify-between gap-5 sm:items-center">
         <LocalSearchbar
           route="/"
           iconPosition="left"
@@ -72,8 +38,8 @@ export default function Home() {
       </div>
       <HomeFilters />
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
