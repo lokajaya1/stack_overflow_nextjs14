@@ -50,7 +50,7 @@ const Metric = ({
       </Link>
     );
   }
-  return <div className="flex-center flew-wrap gap-1">{metricContent}</div>;
+  return <div className="flex-center flex-wrap gap-1">{metricContent}</div>;
 };
 
 export default Metric;

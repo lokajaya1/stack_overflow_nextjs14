@@ -8,7 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import HomeFilters from "../home/HomeFilters";
 
 interface Props {
   filters: {

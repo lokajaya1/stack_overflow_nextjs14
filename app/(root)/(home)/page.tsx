@@ -6,7 +6,6 @@ import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filter";
 import { getQuestions } from "@/lib/actions/question.action";
-import { Item } from "@radix-ui/react-menubar";
 import Link from "next/link";
 
 export default async function Home() {
