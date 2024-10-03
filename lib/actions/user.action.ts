@@ -8,8 +8,6 @@ import {
   UpdateUserParams,
 } from "./shared.type";
 import { revalidatePath } from "next/cache";
-import path from "path";
-import { error } from "console";
 import Question from "@/database/question.model";
 
 export async function getUserById(params: any) {
@@ -71,9 +69,9 @@ export async function deleteUser(params: DeleteUserParams) {
     // and questions, answers, comments, etc.
 
     // get user question ids
-    const userQuestiondIds = await Question.find({ author: user._id }).distinct(
-      "_id"
-    );
+    // const userQuestiondIds = await Question.find({ author: user._id }).distinct(
+    //   "_id"
+    // );
 
     // delete user questions
     await Question.deleteMany({ author: user._id });
@@ -81,7 +79,7 @@ export async function deleteUser(params: DeleteUserParams) {
     // TODO : delete, user, answers, comments, etc.
     const deletedUser = await User.findByIdAndDelete(user._id);
 
-    return deleteUser;
+    return deletedUser;
   } catch (error) {
     console.log(error);
     throw error;

@@ -2,7 +2,6 @@
 
 import { sidebarLinks } from "@/constants";
 import Link from "next/link";
-import { SheetClose } from "../ui/sheet";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Button } from "../ui/button";
@@ -18,7 +17,7 @@ const LeftSidebar = () => {
             (pathName.includes(item.route) && item.route.length > 1) ||
             pathName === item.route;
 
-          //TODO
+          // TODO
 
           return (
             <Link
