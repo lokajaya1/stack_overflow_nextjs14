@@ -4,9 +4,15 @@ const isPublicRoute = createRouteMatcher([
   "/sign-up(.*)",
   "/",
   "/api/webhook",
+  "question/:id",
+  "/tags",
+  "/tags/:id",
+  "/profile/:id",
+  "/community",
+  "/jobs",
 ]);
 
-const ignoredRoutes = ["/api/webhook"];
+const ignoredRoutes = ["/api/webhook", "/api/chatgpt"];
 
 export default clerkMiddleware((auth, req) => {
   if (
