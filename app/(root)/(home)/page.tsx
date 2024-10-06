@@ -21,6 +21,7 @@ export default async function Home() {
           </Button>
         </Link>
       </div>
+
       <div className="mx-sm:flex-col mt-11 flex justify-between gap-5 sm:items-center">
         <LocalSearchbar
           route="/"
@@ -35,6 +36,7 @@ export default async function Home() {
           containerClasses="hidden max-md:flex"
         />
       </div>
+
       <HomeFilters />
       <div className="mt-10 flex w-full flex-col gap-6">
         {result.questions.length > 0 ? (
