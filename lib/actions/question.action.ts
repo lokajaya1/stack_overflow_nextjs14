@@ -2,9 +2,9 @@
 
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
-import { connectToDatabase } from "../mongoose";
-import { CreateQuestionParams, GetQuestionsParams } from "./shared.type";
 import User from "@/database/user.model";
+import { connectToDatabase } from "../mongoose";
+import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
 import { revalidatePath } from "next/cache";
 
 export async function getQuestions(params: GetQuestionsParams) {
@@ -17,7 +17,8 @@ export async function getQuestions(params: GetQuestionsParams) {
         model: Tag,
       })
       .populate({ path: "author", model: User })
-      .sort({ createAt: -1 });
+      .sort({ createdAt: -1 });
+
     return { questions };
   } catch (error) {
     console.log(error);
@@ -59,5 +60,7 @@ export async function createQuestion(params: CreateQuestionParams) {
     // Increment author's reputation by +5 for creating a
 
     revalidatePath(path);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
