@@ -22,7 +22,7 @@ export default async function Home() {
         </Link>
       </div>
 
-      <div className="mx-sm:flex-col mt-11 flex justify-between gap-5 sm:items-center">
+      <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
         <LocalSearchbar
           route="/"
           iconPosition="left"
