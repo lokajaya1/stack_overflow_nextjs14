@@ -1,6 +1,6 @@
 "use client";
 
-import { HomePageFilters } from "@/constants/filter";
+import { HomePageFilters } from "@/constants/filters";
 import React from "react";
 import { Button } from "../ui/button";
 
