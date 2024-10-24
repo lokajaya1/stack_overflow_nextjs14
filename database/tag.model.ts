@@ -1,7 +1,7 @@
 import { Schema, models, model, Document } from "mongoose";
 
 // Interface for Tag Document
-interface ITag extends Document {
+export interface ITag extends Document {
   name: string;
   description: string;
   questions: Schema.Types.ObjectId[];
@@ -12,13 +12,12 @@ interface ITag extends Document {
 // Schema for Tag
 const TagSchema = new Schema<ITag>({
   name: { type: String, required: true, unique: true },
-  description: { type: String, required: false }, // Opsional
+  description: { type: String, required: true },
   questions: [{ type: Schema.Types.ObjectId, ref: "Question" }],
   followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
   createdOn: { type: Date, default: Date.now },
 });
 
-// Check if model already exists, otherwise create a new model
-const Tag = models.Tag || model<ITag>("Tag", TagSchema);
+const Tag = models.Tag || model("Tag", TagSchema);
 
 export default Tag;
