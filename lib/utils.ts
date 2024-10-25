@@ -43,3 +43,9 @@ export const formatLargeNumber = (num: number): string => {
     return num.toString(); // For numbers less than 1,000
   }
 };
+
+export const getMonthYear = (date: Date): string => {
+  const month = date.toLocaleString("default", { month: "long" });
+  const year = date.getFullYear();
+  return `${month} ${year}`;
+};
