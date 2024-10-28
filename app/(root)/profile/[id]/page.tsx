@@ -5,16 +5,19 @@ import { SignedIn } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import React from "react";
 import { getMonthYear } from "@/lib/utils";
 import ProfileLink from "@/components/shared/ProfileLink";
 import Stats from "@/components/shared/Stats";
 import QuestionTab from "@/components/shared/QuestionTab";
+import AnswersTab from "@/components/shared/AnswersTab";
 
-const page = async ({ params, searchParams }: URLProps) => {
+const Page = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
   const userInfo = await getUserInfo({ userId: params.id });
+
   return (
     <>
       <div className="flex flex-col-reverse items-start justify-between sm:flex-row">
@@ -64,6 +67,7 @@ const page = async ({ params, searchParams }: URLProps) => {
             )}
           </div>
         </div>
+
         <div className="flex justify-end max-sm:mb-5 max-sm:w-full sm:mt-3">
           <SignedIn>
             {clerkId === userInfo.user.clerkId && (
@@ -76,10 +80,12 @@ const page = async ({ params, searchParams }: URLProps) => {
           </SignedIn>
         </div>
       </div>
+
       <Stats
-        totalQuestions={userInfo.totalQuestion}
-        totalAnswers={userInfo.totalAnswer}
+        totalQuestions={userInfo.totalQuestions}
+        totalAnswers={userInfo.totalAnswers}
       />
+
       <div className="mt-10 flex gap-10">
         <Tabs defaultValue="top-posts" className="flex-1">
           <TabsList className="background-light800_dark400 min-h-[42px] p-1">
@@ -94,14 +100,20 @@ const page = async ({ params, searchParams }: URLProps) => {
             <QuestionTab
               searchParams={searchParams}
               userId={userInfo.user._id}
-              clerkId={userInfo.user.clerkId}
+              clerkId={clerkId}
             />
           </TabsContent>
-          <TabsContent value="answers">AnswersTab</TabsContent>
+          <TabsContent value="answers" className="flex w-full flex-col gap-6">
+            <AnswersTab
+              searchParams={searchParams}
+              userId={userInfo.user._id}
+              clerkId={clerkId}
+            />
+          </TabsContent>
         </Tabs>
       </div>
     </>
   );
 };
 
-export default page;
+export default Page;
