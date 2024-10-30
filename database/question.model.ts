@@ -1,4 +1,3 @@
-import { QuestionsSchema } from "@/lib/validations";
 import { Schema, models, model, Document } from "mongoose";
 
 // Interface for Question Document
