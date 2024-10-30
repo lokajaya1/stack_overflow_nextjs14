@@ -1,12 +1,13 @@
 import React from "react";
 import Filter from "./Filter";
 import { AnswerFilters } from "@/constants/filters";
+import { getAnswers } from "@/lib/actions/answer.action";
 import Link from "next/link";
 import Image from "next/image";
 import { getTimestamp } from "@/lib/utils";
 import ParseHTML from "./ParseHTML";
-import { getAnswers } from "@/lib/actions/answer.action";
 import Votes from "./Votes";
+import Pagination from "./Pagination";
 
 interface Props {
   questionId: string;
@@ -59,8 +60,7 @@ const AllAnswers = async ({
                     </p>
 
                     <p className="small-regular text-light400_light500 ml-0.5 mt-0.5 line-clamp-1">
-                      <span className="max-sm:hidden"> -</span> answered{" "}
-                      {getTimestamp(answer.createdAt)}
+                      answered {getTimestamp(answer.createdAt)}
                     </p>
                   </div>
                 </Link>
@@ -80,6 +80,13 @@ const AllAnswers = async ({
             <ParseHTML data={answer.content} />
           </article>
         ))}
+      </div>
+
+      <div className="mt-10 w-full">
+        <Pagination
+          pageNumber={page ? +page : 1}
+          isNext={result.isNextAnswer}
+        />
       </div>
     </div>
   );
