@@ -1,9 +1,18 @@
+// /api/chatgpt/route.ts
 import { NextResponse } from "next/server";
 
 export const POST = async (request: Request) => {
-  const { question } = await request.json();
-
   try {
+    const { question } = await request.json();
+
+    // Check if question exists
+    if (!question) {
+      return NextResponse.json(
+        { error: "Question is required" },
+        { status: 400 }
+      );
+    }
+
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -16,21 +25,36 @@ export const POST = async (request: Request) => {
           {
             role: "system",
             content:
-              "You are a knowlegeable assistant that provides quality information.",
+              "You are a helpful assistant that provides detailed answers to questions.",
           },
           {
             role: "user",
-            content: `Tell me ${question}`,
+            content: question,
           },
         ],
       }),
     });
 
-    const responseData = await response.json();
-    const reply = responseData.choices[0].message.content;
+    const data = await response.json();
 
-    return NextResponse.json({ reply });
+    // Check if we have a valid response from OpenAI
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+      console.error("Invalid OpenAI response:", data);
+      return NextResponse.json(
+        { error: "Failed to get response from AI" },
+        { status: 500 }
+      );
+    }
+
+    // Return the AI response
+    return NextResponse.json({
+      reply: data.choices[0].message.content,
+    });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message });
+    console.error("Error in ChatGPT API:", error);
+    return NextResponse.json(
+      { error: error.message || "Internal server error" },
+      { status: 500 }
+    );
   }
 };
