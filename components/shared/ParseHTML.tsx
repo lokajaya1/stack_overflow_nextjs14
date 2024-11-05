@@ -36,7 +36,7 @@ const ParseHTML = ({ data }: Props) => {
     return () => {};
   }, []);
 
-  return <div>{parse(data)}</div>;
+  return <div className={"markdown w-full min-w-full"}>{parse(data)}</div>;
 };
 
 export default ParseHTML;
