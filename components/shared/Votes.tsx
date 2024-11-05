@@ -11,7 +11,6 @@ import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { formatLargeNumber } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { type } from "os";
 import { useEffect } from "react";
 
 interface Props {
