@@ -21,15 +21,11 @@ export const metadata: Metadata = {
 };
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const resolvedSearchParams = await searchParams;
-
   const { userId } = await auth();
 
-  const currentPage = resolvedSearchParams.page
-    ? +resolvedSearchParams.page
-    : 1;
-  const searchQuery = resolvedSearchParams.q || "";
-  const filter = resolvedSearchParams.filter || "";
+  const currentPage = searchParams.page ? +searchParams.page : 1;
+  const searchQuery = searchParams.q || "";
+  const filter = searchParams.filter || "";
 
   let result;
 
