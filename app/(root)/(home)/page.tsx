@@ -27,8 +27,8 @@ export default async function Home({ searchParams }: SearchParamsProps) {
   const currentPage = resolvedSearchParams.page
     ? +resolvedSearchParams.page
     : 1;
-  const searchQuery = resolvedSearchParams.q;
-  const filter = resolvedSearchParams.filter;
+  const searchQuery = resolvedSearchParams.q || "";
+  const filter = resolvedSearchParams.filter || "";
 
   let result;
 
