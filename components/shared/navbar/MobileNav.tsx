@@ -11,7 +11,6 @@ import { sidebarLinks } from "@/constants";
 import { SignedOut } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { usePathname } from "next/navigation";
 
 const NavContent = () => {
