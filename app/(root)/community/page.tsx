@@ -1,114 +1,69 @@
-import QuestionCard from "@/components/cards/QuestionCard";
-import HomeFilters from "@/components/home/HomeFilters";
+import UserCard from "@/components/cards/UserCard";
 import Filter from "@/components/shared/Filter";
-import NoResult from "@/components/shared/NoResult";
 import Pagination from "@/components/shared/Pagination";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
-import { Button } from "@/components/ui/button";
-import { HomePageFilters } from "@/constants/filters";
-import {
-  getQuestions,
-  getRecommendedQuestions,
-} from "@/lib/actions/question.action";
+import { UserFilters } from "@/constants/filters";
+import { getAllUsers } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
-import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home | Dev Overflow",
+  title: "Community | Dev Overflow",
 };
 
-// Ensure SearchParamsProps.searchParams is typed as a Promise if necessary
-export default async function Home({ searchParams }: SearchParamsProps) {
-  // Await searchParams if it’s a Promise
-  const resolvedSearchParams = await searchParams;
+const Page = async ({ searchParams }: SearchParamsProps) => {
+  const resolvedSearchParams = await Promise.resolve(searchParams);
 
   const currentPage = resolvedSearchParams.page
     ? +resolvedSearchParams.page
     : 1;
   const searchQuery = resolvedSearchParams.q;
   const filter = resolvedSearchParams.filter;
-  const { userId } = await auth();
 
-  let result;
-
-  if (filter === "recommended") {
-    if (userId) {
-      result = await getRecommendedQuestions({
-        userId,
-        searchQuery,
-        page: currentPage,
-      });
-    } else {
-      result = {
-        questions: [],
-        isNext: false,
-      };
-    }
-  } else {
-    result = await getQuestions({
-      searchQuery,
-      filter,
-      page: currentPage,
-    });
-  }
+  const result = await getAllUsers({
+    searchQuery,
+    filter,
+    page: currentPage,
+  });
 
   return (
     <>
-      <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
-        <h1 className="h1-bold text-dark100_light900">All Questions</h1>
-        <Link href="/ask-question" className="flex justify-end max-sm:w-full">
-          <Button className="primary-gradient min-h-[46px] px-4 py-3 !text-light-900">
-            Ask a question
-          </Button>
-        </Link>
-      </div>
+      <h1 className="h1-bold text-dark100_light900">All Users</h1>
 
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
         <LocalSearchbar
-          route="/"
+          route="/community"
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
-          placeholder="Search for questions"
+          placeholder="Search for amazing minds"
           otherClasses="flex-1"
         />
         <Filter
-          filters={HomePageFilters}
+          filters={UserFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"
-          containerClasses="hidden max-md:flex"
         />
       </div>
 
-      <HomeFilters />
-      <div className="mt-10 flex w-full flex-col gap-6">
-        {result.questions.length > 0 ? (
-          result.questions.map((question) => (
-            <QuestionCard
-              key={question._id}
-              _id={question._id}
-              title={question.title}
-              tags={question.tags}
-              author={question.author}
-              upvotes={question.upvotes}
-              views={question.views}
-              answers={question.answers}
-              createdAt={question.createdAt}
-            />
-          ))
+      <section className="mt-12 flex flex-wrap gap-4">
+        {result.users.length > 0 ? (
+          result.users.map((user) => <UserCard key={user._id} user={user} />)
         ) : (
-          <NoResult
-            title="There's no question to show"
-            description="Be the first to break the silence! 🚀 Ask a Question and kickstart the discussion. your query could be the next big thing others learn from. Get involved! 💡"
-            link="/ask-question"
-            linkTitle="Ask a Question"
-          />
+          <div className="paragraph-regular text-dark200_light800 mx-auto max-w-4xl text-center">
+            <p>No users yet</p>
+            <Link href="/sign-up" className="mt-2 font-bold text-accent-blue">
+              Join to be the first!
+            </Link>
+          </div>
         )}
-      </div>
+      </section>
+
       <div className="mt-10">
         <Pagination pageNumber={currentPage} isNext={result.isNext} />
       </div>
     </>
   );
-}
+};
+
+export default Page;
