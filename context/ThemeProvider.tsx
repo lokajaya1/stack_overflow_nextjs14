@@ -1,13 +1,7 @@
 "use client";
 
 import { Mode } from "fs";
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 
 interface ThemeContextType {
   mode: string;
