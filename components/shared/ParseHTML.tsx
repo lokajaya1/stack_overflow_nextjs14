@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect } from "react";
 import Prism from "prismjs";
 import parse from "html-react-parser";
 import "prismjs/components/prism-java";
@@ -23,6 +22,7 @@ import "prismjs/components/prism-sql";
 import "prismjs/components/prism-mongodb";
 import "prismjs/plugins/line-numbers/prism-line-numbers.js";
 import "prismjs/plugins/line-numbers/prism-line-numbers.css";
+import React, { useEffect } from "react";
 
 interface Props {
   data: string;
