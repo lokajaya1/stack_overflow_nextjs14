@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default async function Home({ searchParams }: SearchParamsProps) {
   const { userId } = await auth();
-  const resolvedSearchParams = await Promise.resolve(searchParams);
+  const resolvedSearchParams = await searchParams;
 
   const currentPage = resolvedSearchParams.page
     ? +resolvedSearchParams.page
