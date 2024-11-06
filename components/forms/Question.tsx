@@ -1,6 +1,7 @@
 "use client";
 import { Editor } from "@tinymce/tinymce-react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import React from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import {

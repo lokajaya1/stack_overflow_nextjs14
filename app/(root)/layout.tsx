@@ -1,3 +1,4 @@
+import React from "react";
 import LeftSidebar from "@/components/shared/LeftSidebar";
 import Navbar from "@/components/shared/navbar/Navbar";
 import RightSidebar from "@/components/shared/RightSidebar";
