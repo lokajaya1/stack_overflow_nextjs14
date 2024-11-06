@@ -1,7 +1,6 @@
 "use client";
 import { Editor } from "@tinymce/tinymce-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import {
@@ -21,7 +20,7 @@ import Image from "next/image";
 import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { useRouter, usePathname } from "next/navigation";
 import { useTheme } from "@/context/ThemeProvider";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 interface Props {
   type?: string;
