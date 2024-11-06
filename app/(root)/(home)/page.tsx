@@ -20,10 +20,6 @@ export const metadata: Metadata = {
   title: "Home | Dev Overflow",
 };
 
-interface SearchParamsProps {
-  searchParams: { [key: string]: string | undefined };
-}
-
 export default async function Home({ searchParams }: SearchParamsProps) {
   const resolvedSearchParams = await searchParams;
 
