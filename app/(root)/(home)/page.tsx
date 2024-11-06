@@ -10,6 +10,7 @@ import {
   getQuestions,
   getRecommendedQuestions,
 } from "@/lib/actions/question.action";
+import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 
@@ -19,17 +20,16 @@ export const metadata: Metadata = {
   title: "Home | Dev Overflow",
 };
 
-// Definisikan langsung tipe `searchParams`
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | undefined };
-}) {
+export default async function Home({ searchParams }: SearchParamsProps) {
+  const resolvedSearchParams = await searchParams;
+
   const { userId } = await auth();
 
-  const currentPage = searchParams.page ? +searchParams.page : 1;
-  const searchQuery = searchParams.q || "";
-  const filter = searchParams.filter || "";
+  const currentPage = resolvedSearchParams.page
+    ? +resolvedSearchParams.page
+    : 1;
+  const searchQuery = resolvedSearchParams.q || "";
+  const filter = resolvedSearchParams.filter || "";
 
   let result;
 
