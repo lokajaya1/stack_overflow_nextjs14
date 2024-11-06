@@ -16,8 +16,10 @@ import AnswersTab from "@/components/shared/AnswersTab";
 import { userInfo } from "os";
 
 const Page = async ({ params, searchParams }: URLProps) => {
-  const { userId: clerkId } = auth();
-  const userInfo = await getUserInfo({ userId: params.id });
+  const { userId: clerkId } = await auth();
+  const { id } = await params;
+  const resolvedSearchParams = await searchParams;
+  const userInfo = await getUserInfo({ userId: id });
 
   return (
     <>
@@ -104,14 +106,14 @@ const Page = async ({ params, searchParams }: URLProps) => {
             className="mt-5 flex w-full flex-col gap-6"
           >
             <QuestionTab
-              searchParams={searchParams}
+              searchParams={resolvedSearchParams}
               userId={userInfo.user._id}
               clerkId={clerkId}
             />
           </TabsContent>
           <TabsContent value="answers" className="flex w-full flex-col gap-6">
             <AnswersTab
-              searchParams={searchParams}
+              searchParams={resolvedSearchParams}
               userId={userInfo.user._id}
               clerkId={clerkId}
             />

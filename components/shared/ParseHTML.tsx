@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
-
 import Prism from "prismjs";
 import parse from "html-react-parser";
-
 import "prismjs/components/prism-java";
 import "prismjs/components/prism-c";
 import "prismjs/components/prism-cpp";
@@ -31,12 +29,23 @@ interface Props {
 }
 
 const ParseHTML = ({ data }: Props) => {
-  useEffect(() => {
-    Prism.highlightAll();
-    return () => {};
-  }, []);
+  const [parsedHtml, setParsedHtml] = React.useState<React.ReactNode | null>(
+    null
+  );
 
-  return <div className={"markdown w-full min-w-full"}>{parse(data)}</div>;
+  useEffect(() => {
+    const parsed = parse(data);
+    setParsedHtml(parsed);
+  }, [data]);
+
+  useEffect(() => {
+    // Highlight the code after the parsed HTML is rendered
+    Prism.highlightAll();
+  }, [parsedHtml]); // Run this effect when parsedHtml changes
+
+  if (parsedHtml === null) return null;
+
+  return <div className={"markdown w-full min-w-full"}>{parsedHtml}</div>;
 };
 
 export default ParseHTML;

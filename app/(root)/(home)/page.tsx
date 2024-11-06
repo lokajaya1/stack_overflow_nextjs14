@@ -14,15 +14,30 @@ import { SearchParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home | Dev Overflow",
+};
+
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const { userId } = auth();
+  const { userId } = await auth();
+  const resolvedSearchParams = await Promise.resolve(searchParams);
+
+  const currentPage = resolvedSearchParams.page
+    ? +resolvedSearchParams.page
+    : 1;
+  const searchQuery = resolvedSearchParams.q;
+  const filter = resolvedSearchParams.filter;
+
   let result;
-  if (searchParams?.filter === "recommended") {
+
+  if (resolvedSearchParams?.filter === "recommended") {
     if (userId) {
       result = await getRecommendedQuestions({
         userId,
-        searchQuery: searchParams.q,
-        page: searchParams.page ? +searchParams.page : 1,
+        searchQuery,
+        page: currentPage,
       });
     } else {
       result = {
@@ -32,9 +47,9 @@ export default async function Home({ searchParams }: SearchParamsProps) {
     }
   } else {
     result = await getQuestions({
-      searchQuery: searchParams.q,
-      filter: searchParams.filter,
-      page: searchParams.page ? +searchParams.page : 1,
+      searchQuery,
+      filter,
+      page: currentPage,
     });
   }
 
@@ -83,17 +98,14 @@ export default async function Home({ searchParams }: SearchParamsProps) {
         ) : (
           <NoResult
             title="There's no question to show"
-            description="Be the first to break the silence! 🚀 Ask a Question and kickstart the discussion. our query could be the next big thing others learn from. Get involved! 💡"
+            description="Be the first to break the silence! 🚀 Ask a Question and kickstart the discussion. your query could be the next big thing others learn from. Get involved! 💡"
             link="/ask-question"
             linkTitle="Ask a Question"
           />
         )}
       </div>
       <div className="mt-10">
-        <Pagination
-          pageNumber={searchParams?.page ? +searchParams.page : 1}
-          isNext={result.isNext}
-        />
+        <Pagination pageNumber={currentPage} isNext={result.isNext} />
       </div>
     </>
   );

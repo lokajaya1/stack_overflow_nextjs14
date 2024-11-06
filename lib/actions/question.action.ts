@@ -30,9 +30,13 @@ export async function getQuestions(params: GetQuestionsParams) {
     const query: FilterQuery<typeof Question> = {};
 
     if (searchQuery) {
+      const escapedSearchQuery = searchQuery.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+      );
       query.$or = [
-        { title: { $regex: new RegExp(searchQuery, "i") } },
-        { content: { $regex: new RegExp(searchQuery, "i") } },
+        { title: { $regex: new RegExp(escapedSearchQuery, "i") } },
+        { content: { $regex: new RegExp(escapedSearchQuery, "i") } },
       ];
     }
 
@@ -103,16 +107,18 @@ export async function createQuestion(params: CreateQuestionParams) {
     // Create an interaction record for the user's ask_question action
     await Interaction.create({
       user: author,
-      action: "ask-question",
+      action: "ask_question",
       question: question._id,
-      tag: tagDocuments,
+      tags: tagDocuments,
     });
 
     // Increment author's reputation by +5 for creating a question
     await User.findByIdAndUpdate(author, { $inc: { reputation: 5 } });
 
     revalidatePath(path);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function getQuestionById(params: GetQuestionByIdParams) {
@@ -163,13 +169,13 @@ export async function upvoteQuestion(params: QuestionVoteParams) {
       throw new Error("Question not found");
     }
 
-    // Increment author's reputation by +1/1 for upvoting/revoking an upvote to the question
+    // Increment author's reputation by +1/-1 for upvoting/revoking an upvote to the question
     await User.findByIdAndUpdate(userId, {
       $inc: { reputation: hasupVoted ? -1 : 1 },
     });
 
-    // Increment author's reputation by +10/10 for receiving an upvote/downvote to the question
-    await User.findByIdAndUpdate(userId, {
+    // Increment author's reputation by +10/-10 for recieving an upvote/downvote to the question
+    await User.findByIdAndUpdate(question.author, {
       $inc: { reputation: hasupVoted ? -10 : 10 },
     });
 
@@ -189,7 +195,7 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
     let updateQuery = {};
 
     if (hasdownVoted) {
-      updateQuery = { $pull: { downvote: userId } };
+      updateQuery = { $pull: { downvotes: userId } };
     } else if (hasupVoted) {
       updateQuery = {
         $pull: { upvotes: userId },
@@ -208,6 +214,13 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
     }
 
     // Increment author's reputation
+    await User.findByIdAndUpdate(userId, {
+      $inc: { reputation: hasdownVoted ? -2 : 2 },
+    });
+
+    await User.findByIdAndUpdate(question.author, {
+      $inc: { reputation: hasdownVoted ? -10 : 10 },
+    });
 
     revalidatePath(path);
   } catch (error) {
@@ -264,10 +277,7 @@ export async function getHotQuestions() {
     connectToDatabase();
 
     const hotQuestions = await Question.find({})
-      .sort({
-        views: -1,
-        upvotes: -1,
-      })
+      .sort({ views: -1, upvotes: -1 })
       .limit(5);
 
     return hotQuestions;

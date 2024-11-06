@@ -38,7 +38,7 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
   const parsedQuestionDetails =
     questionDetails && JSON.parse(questionDetails || "");
 
-  const groupedTags = parsedQuestionDetails?.tags.map((tag) => tag.name);
+  const groupedTags = parsedQuestionDetails?.tags.map((tag: any) => tag.name);
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof QuestionsSchema>>({
@@ -57,13 +57,13 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
     try {
       if (type === "Edit") {
         await editQuestion({
-          questionId: parsedQuestionDetails?._id,
+          questionId: parsedQuestionDetails._id,
           title: values.title,
           content: values.explanation,
           path: pathname,
         });
 
-        router.push(`/question/${parsedQuestionDetails?._id}`);
+        router.push(`/question/${parsedQuestionDetails._id}`);
       } else {
         await createQuestion({
           title: values.title,
@@ -210,7 +210,7 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
                 Tags <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl className="mt-3.5">
-                <>
+                <div>
                   <Input
                     disabled={type === "Edit"}
                     className="no-focus paragraph-regular background-light900_dark300 light-border-2 text-dark300_light700 min-h-[56px] border"
@@ -244,7 +244,7 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
                       ))}
                     </div>
                   )}
-                </>
+                </div>
               </FormControl>
               <FormDescription className="body-regular mt-2.5 text-light-500">
                 Add up to 3 tags to describe what your question is about. You

@@ -4,14 +4,13 @@ import { toast } from "@/hooks/use-toast";
 import { downvoteAnswer, upvoteAnswer } from "@/lib/actions/answer.action";
 import { viewQuestion } from "@/lib/actions/interaction.action";
 import {
-  upvoteQuestion,
   downvoteQuestion,
+  upvoteQuestion,
 } from "@/lib/actions/question.action";
 import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { formatLargeNumber } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { type } from "os";
 import { useEffect } from "react";
 
 interface Props {
@@ -58,6 +57,7 @@ const Votes = ({
         description: "You must be logged in to perform this action",
       });
     }
+
     if (action === "upvote") {
       if (type === "Question") {
         await upvoteQuestion({
@@ -103,8 +103,8 @@ const Votes = ({
       }
 
       return toast({
-        title: `Downvote ${!hasupVoted ? "Successful" : "Removed"}`,
-        variant: !hasupVoted ? "default" : "destructive",
+        title: `Downvote ${!hasdownVoted ? "Successful" : "Removed"}`,
+        variant: !hasdownVoted ? "default" : "destructive",
       });
     }
   };
