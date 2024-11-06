@@ -32,6 +32,10 @@
     "mongodb": "^6.10.0",
     "mongoose": "^8.8.0",
     "next": "^15.0.2",
+<<<<<<< HEAD
+=======
+    "npm-check-updates": "^17.1.10",
+>>>>>>> b0e1d1e53d4864d3f9bd5fea422e696a67f33207
     "prettier": "^3.3.3",
     "prismjs": "^1.29.0",
     "qs": "^6.13.0",
@@ -46,7 +50,10 @@
   },
   "devDependencies": {
     "@types/node": "^22",
+<<<<<<< HEAD
     "@types/prismjs": "^1.26.5",
+=======
+>>>>>>> b0e1d1e53d4864d3f9bd5fea422e696a67f33207
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^9",
