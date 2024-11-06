@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-import React from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter, Space_Grotesk } from "next/font/google";
 import type { Metadata } from "next";
@@ -38,6 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
         <ClerkProvider
+          dynamic
           appearance={{
             elements: {
               formButtonPrimary: "primary-gradient",

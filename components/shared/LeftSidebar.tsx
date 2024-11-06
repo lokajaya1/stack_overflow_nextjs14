@@ -10,27 +10,30 @@ import { SignedOut, useAuth } from "@clerk/nextjs";
 const LeftSidebar = () => {
   const { userId } = useAuth();
   const pathName = usePathname();
+
   return (
     <section className="background-light900_dark200 light-border custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto border-r p-6 pt-36 shadow-light-300 dark:shadow-none max-sm:hidden lg:w-[266px]">
       <div className="flex flex-col gap-6">
         {sidebarLinks.map((item) => {
+          // Determine the route, especially for the dynamic /profile route
+          const route =
+            item.route === "/profile" && userId
+              ? `${item.route}/${userId}`
+              : item.route;
+
           const isActive =
             (pathName.includes(item.route) && item.route.length > 1) ||
             pathName === item.route;
 
-          if (item.route === "/profile") {
-            if (userId) {
-              item.route = `${item.route}/${userId}`;
-            } else {
-              return null;
-            }
-          }
-
           return (
             <Link
               key={item.route}
-              href={item.route}
-              className={`${isActive ? "primary-gradient rounded-lg text-light-900" : "text-dark300_light900"} flex items-center justify-start gap-4 bg-transparent p-4`}
+              href={route}
+              className={`flex items-center justify-start gap-4 bg-transparent p-4 ${
+                isActive
+                  ? "primary-gradient rounded-lg text-light-900"
+                  : "text-dark300_light900"
+              }`}
             >
               <Image
                 src={item.imgURL}
@@ -51,7 +54,7 @@ const LeftSidebar = () => {
       <SignedOut>
         <div className="flex flex-col gap-3">
           <Link href="/sign-in">
-            <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
+            <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none flex items-center gap-2">
               <Image
                 src="/assets/icons/account.svg"
                 alt="account"
@@ -65,7 +68,7 @@ const LeftSidebar = () => {
             </Button>
           </Link>
           <Link href="/sign-up">
-            <Button className="small-medium light-border-2 btn-tertiary text-dark400_light900 min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
+            <Button className="small-medium light-border-2 btn-tertiary text-dark400_light900 min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none flex items-center gap-2">
               <Image
                 src="/assets/icons/sign-up.svg"
                 alt="sign up"

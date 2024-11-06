@@ -7,11 +7,25 @@ import { getAllUsers } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
 import Link from "next/link";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Community | Dev Overflow",
+};
+
 const Page = async ({ searchParams }: SearchParamsProps) => {
+  const resolvedSearchParams = await Promise.resolve(searchParams);
+
+  const currentPage = resolvedSearchParams.page
+    ? +resolvedSearchParams.page
+    : 1;
+  const searchQuery = resolvedSearchParams.q;
+  const filter = resolvedSearchParams.filter;
+
   const result = await getAllUsers({
-    searchQuery: searchParams.q,
-    filter: searchParams.filter,
-    page: searchParams.page ? +searchParams.page : 1,
+    searchQuery,
+    filter,
+    page: currentPage,
   });
 
   return (
@@ -46,10 +60,7 @@ const Page = async ({ searchParams }: SearchParamsProps) => {
       </section>
 
       <div className="mt-10">
-        <Pagination
-          pageNumber={searchParams?.page ? +searchParams.page : 1}
-          isNext={result.isNext}
-        />
+        <Pagination pageNumber={currentPage} isNext={result.isNext} />
       </div>
     </>
   );

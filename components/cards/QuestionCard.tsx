@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import RenderTag from "../shared/RenderTag";
 import Metric from "../shared/Metric";
 import { formatLargeNumber, getTimestamp } from "@/lib/utils";
@@ -17,12 +16,13 @@ interface QuestionProps {
     _id: string;
     name: string;
     picture: string;
+    clerkId: string;
   };
   upvotes: string[];
   views: number;
   answers: Array<object>;
   createdAt: Date;
-  clerkId?: string;
+  clerkId?: string | null;
 }
 
 const QuestionCard = ({

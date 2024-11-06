@@ -17,9 +17,6 @@ const ignoredRoutes = createRouteMatcher(["/api/webhooks", "/api/chatgpt"]);
 const isProtectedRoute = createRouteMatcher(["/ask-question(.*)"]);
 
 export default clerkMiddleware((auth, req) => {
-  if (isProtectedRoute(req)) {
-    auth().protect();
-  }
   // Additional logic for ignored routes or other conditions
   if (publicRoutes(req)) {
     // Allow access to public routes without authentication
@@ -30,8 +27,6 @@ export default clerkMiddleware((auth, req) => {
     // Skip Clerk middleware for ignored routes
     return;
   }
-
-  auth().protect();
 });
 
 export const config = {

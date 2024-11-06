@@ -28,15 +28,22 @@ interface QuestionType {
 }
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const { userId } = auth();
+  const resolvedSearchParams = await Promise.resolve(searchParams);
+
+  const currentPage = resolvedSearchParams.page
+    ? +resolvedSearchParams.page
+    : 1;
+  const searchQuery = resolvedSearchParams.q;
+  const filter = resolvedSearchParams.filter;
+  const { userId } = await auth();
 
   if (!userId) return null;
 
   const result = await getSavedQuestions({
     clerkId: userId,
-    searchQuery: searchParams.q,
-    filter: searchParams.filter,
-    page: searchParams.page ? +searchParams.page : 1,
+    searchQuery,
+    filter,
+    page: currentPage,
   });
 
   return (
@@ -82,10 +89,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
         )}
       </div>
       <div className="mt-10">
-        <Pagination
-          pageNumber={searchParams?.page ? +searchParams.page : 1}
-          isNext={result.isNext}
-        />
+        <Pagination pageNumber={currentPage} isNext={result.isNext} />
       </div>
     </>
   );

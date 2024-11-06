@@ -25,10 +25,18 @@ interface QuestionType {
 }
 
 const Page = async ({ params, searchParams }: URLProps) => {
+  const resolvedSearchParams = await Promise.resolve(searchParams);
+  const resolvedParams = await Promise.resolve(params);
+
+  const currentPage = resolvedSearchParams.page
+    ? +resolvedSearchParams.page
+    : 1;
+  const searchQuery = resolvedSearchParams.q;
+
   const result = await getQuestionsByTagId({
-    tagId: params.id,
-    page: searchParams.page ? +searchParams.page : 1,
-    searchQuery: searchParams.q,
+    tagId: resolvedParams.id,
+    page: currentPage,
+    searchQuery,
   });
 
   console.log(result);
@@ -72,10 +80,7 @@ const Page = async ({ params, searchParams }: URLProps) => {
         )}
       </div>
       <div className="mt-10">
-        <Pagination
-          pageNumber={searchParams?.page ? +searchParams.page : 1}
-          isNext={result.isNext}
-        />
+        <Pagination pageNumber={currentPage} isNext={result.isNext} />
       </div>
     </>
   );
