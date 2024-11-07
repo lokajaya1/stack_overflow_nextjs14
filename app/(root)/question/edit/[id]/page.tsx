@@ -5,12 +5,13 @@ import { ParamsProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 
 const Page = async ({ params }: ParamsProps) => {
+  const resolvedParams = await params;
   const { userId } = await auth();
 
   if (!userId) return null;
 
   const mongoUser = await getUserById({ userId });
-  const result = await getQuestionById({ questionId: params.id });
+  const result = await getQuestionById({ questionId: resolvedParams.id });
 
   return (
     <>
