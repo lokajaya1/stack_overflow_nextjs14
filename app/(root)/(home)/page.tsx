@@ -21,18 +21,18 @@ export const metadata: Metadata = {
 };
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const { userId } = await auth();
-  const resolvedSearchParams = await Promise.resolve(searchParams);
+  const resolvedSearchParams = await searchParams;
 
   const currentPage = resolvedSearchParams.page
     ? +resolvedSearchParams.page
     : 1;
   const searchQuery = resolvedSearchParams.q;
   const filter = resolvedSearchParams.filter;
+  const { userId } = await auth();
 
   let result;
 
-  if (resolvedSearchParams?.filter === "recommended") {
+  if (filter === "recommended") {
     if (userId) {
       result = await getRecommendedQuestions({
         userId,
