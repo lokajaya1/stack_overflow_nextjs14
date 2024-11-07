@@ -11,11 +11,11 @@ import {
 import { Job } from "@/types";
 
 interface Props {
-  searchParams: {
-    q?: string; // Marked as optional
-    location?: string; // Marked as optional
-    page?: string; // Marked as optional
-  };
+  searchParams: Promise<{
+    q?: string;
+    location?: string;
+    page?: string;
+  }>;
 }
 
 const Page = async ({ searchParams }: Props) => {
