@@ -8,7 +8,7 @@ import { SearchParamsProps } from "@/types";
 import Link from "next/link";
 
 const Page = async ({ searchParams }: SearchParamsProps) => {
-  const resolvedSearchParams = await Promise.resolve(searchParams);
+  const resolvedSearchParams = await searchParams;
 
   const currentPage = resolvedSearchParams.page
     ? +resolvedSearchParams.page

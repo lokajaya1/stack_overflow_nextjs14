@@ -28,7 +28,7 @@ interface QuestionType {
 }
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const resolvedSearchParams = await Promise.resolve(searchParams);
+  const resolvedSearchParams = await searchParams;
 
   const currentPage = resolvedSearchParams.page
     ? +resolvedSearchParams.page

@@ -25,8 +25,8 @@ interface QuestionType {
 }
 
 const Page = async ({ params, searchParams }: URLProps) => {
-  const resolvedSearchParams = await Promise.resolve(searchParams);
-  const resolvedParams = await Promise.resolve(params);
+  const resolvedSearchParams = await searchParams;
+  const resolvedParams = await params;
 
   const currentPage = resolvedSearchParams.page
     ? +resolvedSearchParams.page
