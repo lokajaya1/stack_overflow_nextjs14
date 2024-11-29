@@ -1,4 +1,4 @@
-# Stack Overflow Clone dengan Next.js 14
+# Stack Overflow Clone dengan Next.js 14 (DevOverflow)
 
 Proyek ini adalah **Stack Overflow clone** yang dibangun menggunakan **Next.js 14**. Aplikasi ini mengimplementasikan fitur-fitur dasar dari platform tanya jawab dan menunjukkan praktik pengembangan web modern.
 
