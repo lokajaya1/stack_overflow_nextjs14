@@ -116,7 +116,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Lokajaya Andala - [@Lokajaya_Andala](https://x.com/Lokajaya_Andala)
 
-Project Link: [https://github.com/username/devoverflow](https://github.com/username/devoverflow)
+Project Link: [https://github.com/lokajaya1](https://github.com/lokajaya1)
 
 ## 📚 Additional Resources
 
