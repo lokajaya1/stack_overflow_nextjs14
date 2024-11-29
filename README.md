@@ -1,24 +1,24 @@
-# Stack Overflow Clone dengan Next.js 14 (DevOverflow)
+# Stack Overflow Clone with Next.js 14 (DevOverflow)
 
-Proyek ini adalah **Stack Overflow clone** yang dibangun menggunakan **Next.js 14**. Aplikasi ini mengimplementasikan fitur-fitur dasar dari platform tanya jawab dan menunjukkan praktik pengembangan web modern.
+This project is a **Stack Overflow clone** built using **Next.js 14**. The application implements core functionalities of a question-and-answer platform and demonstrates modern web development practices.
 
-## Cara Memulai
+## Getting Started
 
-### Prasyarat
+### Prerequisites
 
-- **Node.js** (v16 atau lebih baru)
-- **npm**, **yarn**, **pnpm**, atau **bun** (sebagai package manager)
+- **Node.js** (v16 or later)
+- **npm**, **yarn**, **pnpm**, or **bun** (as the package manager)
 
-### Langkah-langkah Instalasi
+### Installation Steps
 
-1. Clone repositori ini:
+1. Clone this repository:
 
    ```bash
    git clone https://github.com/username/repository-name.git
    cd repository-name
    ```
 
-2. Install dependensi:
+2. Install dependencies:
 
    ```bash
      npm install
@@ -45,12 +45,13 @@ Proyek ini adalah **Stack Overflow clone** yang dibangun menggunakan **Next.js 1
 
 
 ### Fitur : 
-	• Autentikasi Pengguna: Pendaftaran dan login pengguna (dengan dukungan penyedia sosial seperti Google, GitHub, dll.)
-	• Tanya Jawab: Pengguna dapat mengajukan pertanyaan dan memberikan jawaban.
-	• Sistem Voting: Upvote dan downvote untuk pertanyaan dan jawaban.
-	• Pencarian dan Filter: Fitur pencarian lanjutan untuk menyaring pertanyaan berdasarkan judul, tag, atau pengguna.
-	• Desain Responsif: Tampilan yang responsif untuk semua perangkat.
-	• Optimasi SEO: Meta tag dinamis untuk meningkatkan visibilitas di mesin pencari.
+	• User Authentication: User registration and login (with support for social providers like Google, GitHub, etc.)
+	• Ask Questions: Users can post questions and categorize them with tags.
+	• Answer Questions: Other users can provide answers to questions.
+	• Voting System: Upvote and downvote both questions and answers.
+	• Search and Filter: Advanced search functionality to filter questions by title, tags, or users.
+	• Responsive Design: Fully responsive layout for all devices.
+	• SEO Optimization: Dynamic meta tags for improved search engine visibility.
 
 ### Penggunaan Font
 Proyek ini menggunakan [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) untuk mengoptimalkan dan memuat font [Geist](https://vercel.com/font), font keluarga baru dari Vercel.
