@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stack Overflow Clone dengan Next.js 14
 
-## Getting Started
+Proyek ini adalah **Stack Overflow clone** yang dibangun menggunakan **Next.js 14**. Aplikasi ini mengimplementasikan fitur-fitur dasar dari platform tanya jawab dan menunjukkan praktik pengembangan web modern.
 
-First, run the development server:
+## Cara Memulai
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prasyarat
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Pastikan Anda memiliki hal-hal berikut terpasang:
+- **Node.js** (v16 atau lebih baru)
+- **npm**, **yarn**, **pnpm**, atau **bun** (sebagai package manager)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Langkah-langkah Instalasi
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Clone repositori ini:
 
-## Learn More
+   ```bash
+   git clone https://github.com/username/repository-name.git
+   cd repository-name
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Install dependensi:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+     npm install
+    # atau
+    yarn install
+    # atau
+    pnpm install
+    # atau
+    bun install
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Menjalankan server pengembangan:
+     ```bash
+    npm run dev
+    # atau
+    yarn dev
+    # atau
+    pnpm dev
+    # atau
+    bun dev
+    ```
+     
+4. Buka http://localhost:3000 di browser Anda untuk melihat hasilnya.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Fitur : 
+	•	Autentikasi Pengguna: Pendaftaran dan login pengguna (dengan dukungan penyedia sosial seperti Google, GitHub, dll.)
+	•	Tanya Jawab: Pengguna dapat mengajukan pertanyaan dan memberikan jawaban.
+	•	Sistem Voting: Upvote dan downvote untuk pertanyaan dan jawaban.
+	•	Pencarian dan Filter: Fitur pencarian lanjutan untuk menyaring pertanyaan berdasarkan judul, tag, atau pengguna.
+	•	Desain Responsif: Tampilan yang responsif untuk semua perangkat.
+	•	Optimasi SEO: Meta tag dinamis untuk meningkatkan visibilitas di mesin pencari.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Penggunaan Font
+Proyek ini menggunakan next/font untuk mengoptimalkan dan memuat font Geist, font keluarga baru dari Vercel.
+
+### Pelajari Lebih Lanjut
+Untuk mempelajari lebih lanjut tentang Next.js, lihat sumber daya berikut:
+	•	Dokumentasi Next.js - pelajari tentang fitur dan API Next.js.
+	•	Belajar Next.js - tutorial interaktif tentang Next.js.
+
+Anda juga dapat mengunjungi repositori Next.js di GitHub - umpan balik dan kontribusi Anda sangat diterima!
+
+### Deploy ke Vercel
+Cara termudah untuk melakukan deployment aplikasi Next.js Anda adalah dengan menggunakan Platform Vercel dari pencipta Next.js.
+
+Lihat dokumentasi deployment Next.js untuk informasi lebih lanjut.
