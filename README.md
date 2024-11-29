@@ -53,16 +53,16 @@ Proyek ini adalah **Stack Overflow clone** yang dibangun menggunakan **Next.js 1
 	• Optimasi SEO: Meta tag dinamis untuk meningkatkan visibilitas di mesin pencari.
 
 ### Penggunaan Font
-Proyek ini menggunakan next/font untuk mengoptimalkan dan memuat font Geist, font keluarga baru dari Vercel.
+Proyek ini menggunakan [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) untuk mengoptimalkan dan memuat font [Geist](https://vercel.com/font), font keluarga baru dari Vercel.
 
 ### Pelajari Lebih Lanjut
 Untuk mempelajari lebih lanjut tentang Next.js, lihat sumber daya berikut:
-	•	Dokumentasi Next.js - pelajari tentang fitur dan API Next.js.
-	•	Belajar Next.js - tutorial interaktif tentang Next.js.
+- [Dokumentasi Next.js](https://nextjs.org/docs) - pelajari tentang fitur dan API Next.js.
+- [Belajar Next.js](https://nextjs.org/learn) - tutorial interaktif tentang Next.js.
 
-Anda juga dapat mengunjungi repositori Next.js di GitHub - umpan balik dan kontribusi Anda sangat diterima!
+Anda juga dapat mengunjungi [repositori Next.js di GitHub](https://github.com/vercel/next.js) - umpan balik dan kontribusi Anda sangat diterima!
 
 ### Deploy ke Vercel
-Cara termudah untuk melakukan deployment aplikasi Next.js Anda adalah dengan menggunakan Platform Vercel dari pencipta Next.js.
+Cara termudah untuk melakukan deployment aplikasi Next.js Anda adalah dengan menggunakan [Platform Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) dari pencipta Next.js.
 
-Lihat dokumentasi deployment Next.js untuk informasi lebih lanjut.
+Lihat [dokumentasi deployment Next.js](https://nextjs.org/docs/app/building-your-application/deploying) untuk informasi lebih lanjut.
