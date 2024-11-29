@@ -49,7 +49,7 @@ DevOverflow is a comprehensive Stack Overflow-like platform built with cutting-e
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/username/devoverflow.git
+git clone https://github.com/lokajaya1/stack_overflow_nextjs14.git
 cd devoverflow
 ```
 
@@ -67,10 +67,12 @@ bun install
 
 ### 3. Environment Configuration
 Create a `.env.local` file with the following variables:
-- `MONGODB_URI`
-- `NEXTAUTH_SECRET`
-- `GOOGLE_CLIENT_ID`
-- `GOOGLE_CLIENT_SECRET`
+- `MONGODB_URL`
+- `CLERK_SECRET`
+- `TINY_EDITOR_API_KEY`
+- `GEMINI_API_KEY`
+- `GOOGLE_API_KEY`
+- `RAPID_API_KEY`
 
 ### 4. Run Development Server
 ```bash
@@ -112,7 +114,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📞 Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_twitter)
+Lokajaya Andala - [@Lokajaya_Andala](https://x.com/Lokajaya_Andala)
 
 Project Link: [https://github.com/username/devoverflow](https://github.com/username/devoverflow)
 
