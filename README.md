@@ -35,7 +35,7 @@ DevOverflow is a comprehensive Stack Overflow-like platform built with cutting-e
 - **Framework**: Next.js 14
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **Authentication**: NextAuth.js
+- **Authentication**: Clerk
 - **Database**: MongoDB/Prisma
 - **State Management**: React Hooks
 - **Deployment**: Vercel
